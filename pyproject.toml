@@ -1,0 +1,39 @@
+[project]
+name = "enterprise-rag-project"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "MaazZarif", email = "maazbangash2004@gmail.com" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "docx2txt>=0.9",
+    "email-validator>=2.3.0",
+    "fastapi>=0.141.1",
+    "langchain>=1.3.18",
+    "langchain-community>=0.4.2",
+    "langchain-groq>=1.1.3",
+    "langchain-huggingface>=1.2.2",
+    "langchain-qdrant>=1.1.0",
+    "langgraph-checkpoint-postgres>=3.1.2",
+    "pgvector>=0.5.0",
+    "psycopg[binary]>=3.3.5",
+    "pwdlib[argon2]>=0.3.1",
+    "pyjwt>=2.13.0",
+    "pypdf>=6.16.2",
+    "python-dotenv>=1.2.3",
+    "python-multipart>=0.0.32",
+    "qdrant-client>=1.19.0",
+    "sentence-transformers>=6.0.1",
+    "sqlalchemy>=2.0.52",
+    "streamlit>=1.63.0",
+    "uvicorn>=0.52.4",
+]
+
+[project.scripts]
+enterprise-rag-project = "enterprise_rag_project:main"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
