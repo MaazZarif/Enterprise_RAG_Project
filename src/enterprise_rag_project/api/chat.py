@@ -77,7 +77,7 @@ def chat(
         ],
 
         "contextualized_query": "",
-        "rewritten_query": "",
+        # "rewritten_query": "",
 
         "documents": [],
         "reranked_documents": [],

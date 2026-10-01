@@ -6,7 +6,7 @@ from enterprise_rag_project.agents.nodes.direct_answer import direct_answer
 from enterprise_rag_project.agents.conditions.route_query import route_query
 from enterprise_rag_project.agents.conditions.route_context import route_context
 from enterprise_rag_project.agents.nodes.context_check import context_check
-from enterprise_rag_project.agents.nodes.rewrite_query import rewrite_query
+# from enterprise_rag_project.agents.nodes.rewrite_query import rewrite_query
 from enterprise_rag_project.agents.nodes.reranker import rerank_documents
 from enterprise_rag_project.agents.nodes.answer_generator import answer_generator
 from enterprise_rag_project.agents.nodes.citation_builder import citation_builder
@@ -29,7 +29,7 @@ graph_builder.add_node("query_analyzer",query_analyzer)
 graph_builder.add_node("retrieval_node",retrieval_node)
 graph_builder.add_node("direct_answer",direct_answer)
 graph_builder.add_node("context_check",context_check)
-graph_builder.add_node("rewrite_query",rewrite_query)
+# graph_builder.add_node("rewrite_query",rewrite_query)
 graph_builder.add_node("reranker",rerank_documents)
 graph_builder.add_node("answer_generator",answer_generator)
 graph_builder.add_node("citation_builder",citation_builder)
@@ -60,7 +60,7 @@ graph_builder.add_edge("retrieval_node","context_check")
 graph_builder.add_edge("direct_answer",END)
 graph_builder.add_conditional_edges("context_check",route_context,{"proceed":"reranker","human_review":"human_review"})
 graph_builder.add_conditional_edges("human_review",route_human_review,{"proceed":"reranker","reject":"fallback_answer"})
-graph_builder.add_edge("rewrite_query","retrieval_node")
+# graph_builder.add_edge("rewrite_query","retrieval_node")
 graph_builder.add_edge("reranker","answer_generator")
 
 
