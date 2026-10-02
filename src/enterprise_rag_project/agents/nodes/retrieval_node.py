@@ -4,8 +4,8 @@ from enterprise_rag_project.ingestion.retriever import get_retriever
 def retrieval_node(state: RAGState):
 
     query = (
-        state.get("rewritten_query")
-        or state.get("contextualized_query")
+        # state.get("rewritten_query")
+        state.get("contextualized_query")
         or state["query"]
     )
 

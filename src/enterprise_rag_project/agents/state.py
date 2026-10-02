@@ -14,7 +14,7 @@ class RAGState(TypedDict):
     route:Literal["rag", "direct"]
     answer:str
     context_status:Literal["sufficient","insufficient"]
-    rewritten_query:str
+    # rewritten_query:str
     retry_count:str
     reranked_documents:list[Document]
     citations:List[dict]
@@ -22,3 +22,4 @@ class RAGState(TypedDict):
     generation_attempts: int
     messages: Annotated[list[BaseMessage], add_messages]
     contextualized_query:str
+    human_decision: bool | None

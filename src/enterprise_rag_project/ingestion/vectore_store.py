@@ -6,7 +6,7 @@ from enterprise_rag_project.ingestion.embeddings import get_embeddings
 import os
 from functools import lru_cache
 
-load_dotenv()  # Load environment variables from .env file
+load_dotenv()
 
 @lru_cache(maxsize=1)
 def get_qdrant_client():

@@ -27,10 +27,12 @@ def context_check(state: RAGState):
         }
 
     query = (
-        state.get("rewritten_query")
-        or state.get("contextualized_query")
+        # state.get("rewritten_query")
+        state.get("contextualized_query")
         or state["query"]
     )
+
+    
 
     context = "\n\n".join(
         doc.page_content

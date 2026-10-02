@@ -36,8 +36,8 @@ def rerank_documents(state: RAGState):
 
     # Use the query that produced the current retrieval results
     query = (
-        state.get("rewritten_query")
-        or state.get("contextualized_query")
+        # state.get("rewritten_query")
+        state.get("contextualized_query")
         or state["query"]
     )
 
