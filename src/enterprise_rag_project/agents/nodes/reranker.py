@@ -6,10 +6,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from typing import List
 
 
-class RankedDocuments(BaseModel):
-     ranked_indices: list[int] = Field(
-        description="Indices of documents ordered from most relevant to least relevant"
-    )
+
 
 from typing import List
 
