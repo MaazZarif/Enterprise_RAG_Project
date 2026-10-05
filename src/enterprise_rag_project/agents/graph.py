@@ -51,13 +51,14 @@ graph_builder.add_conditional_edges(
         "direct": "direct_answer"
     }
 )
+graph_builder.add_edge("direct_answer",END)
+
 
 graph_builder.add_edge(
     "contextualize_query",
     "retrieval_node"
 )
 graph_builder.add_edge("retrieval_node","context_check")
-graph_builder.add_edge("direct_answer",END)
 graph_builder.add_conditional_edges("context_check",route_context,{"proceed":"reranker","human_review":"human_review"})
 graph_builder.add_conditional_edges("human_review",route_human_review,{"proceed":"reranker","reject":"fallback_answer"})
 # graph_builder.add_edge("rewrite_query","retrieval_node")
