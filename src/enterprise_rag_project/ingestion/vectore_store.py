@@ -46,7 +46,7 @@ def initialize_collection():
             field_schema=PayloadSchemaType.INTEGER,
         )
 
-
+@lru_cache(maxsize=1)
 def get_vector_store():
     """
     Create and return a QdrantVectorStore instance.

@@ -56,18 +56,30 @@ graph_builder.add_edge(
     "contextualize_query",
     "retrieval_node"
 )
-graph_builder.add_edge("retrieval_node","context_check")
-graph_builder.add_edge("direct_answer",END)
-graph_builder.add_conditional_edges("context_check",route_context,{"proceed":"reranker","human_review":"human_review"})
-graph_builder.add_conditional_edges("human_review",route_human_review,{"proceed":"reranker","reject":"fallback_answer"})
-# graph_builder.add_edge("rewrite_query","retrieval_node")
-graph_builder.add_edge("reranker","answer_generator")
+graph_builder.add_edge("retrieval_node", "reranker")
 
+graph_builder.add_edge("reranker", "context_check")
 
-graph_builder.add_edge(
-    "answer_generator",
-    "grounding_check"
+graph_builder.add_conditional_edges(
+    "context_check",
+    route_context,
+    {
+        "proceed": "answer_generator",
+        "human_review": "human_review"
+    }
 )
+
+graph_builder.add_conditional_edges(
+    "human_review",
+    route_human_review,
+    {
+        "proceed": "answer_generator",
+        "reject": "fallback_answer"
+    }
+)
+
+graph_builder.add_edge("answer_generator", "grounding_check")
+
 graph_builder.add_conditional_edges(
     "grounding_check",
     route_grounding,

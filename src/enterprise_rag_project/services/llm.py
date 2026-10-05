@@ -11,3 +11,10 @@ def get_llm():
         api_key=os.getenv("GROQ_API_KEY"),
         temperature=0,
     )
+
+def get_light_llm():
+    return ChatGroq(
+        model="openai/gpt-oss-20b",
+        api_key=os.getenv("GROQ_API_KEY"),
+        temperature=0,
+    )
