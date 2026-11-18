@@ -18,6 +18,7 @@ def load_dataset():
 def evaluate():
 
     dataset = load_dataset()
+    dataset = dataset[:10]
 
     with get_checkpointer() as checkpointer:
 

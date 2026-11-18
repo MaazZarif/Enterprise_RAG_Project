@@ -13,4 +13,4 @@ if not CHECKPOINT_DB_URL:
 def get_checkpointer():
     return PostgresSaver.from_conn_string(
         CHECKPOINT_DB_URL
-    )
+    )   

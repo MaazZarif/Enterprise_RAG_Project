@@ -17,7 +17,6 @@ def load_document(file_path: str):
         List[Document]: A list of loaded documents.
     """
 
-    all_documents=[]
     file_path = Path(file_path)
 
     if not file_path.exists():

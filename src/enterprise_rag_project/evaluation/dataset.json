@@ -1,242 +1,242 @@
-[
-  {
-    "id": "Q001",
-    "question": "How many PTO days does a full-time employee receive per calendar year?",
-    "ground_truth": "A full-time employee receives 20 PTO days per calendar year.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q002",
-    "question": "How many remote-work days are allowed per week?",
-    "ground_truth": "Employees may work remotely up to three days per week.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q003",
-    "question": "What are AcmeTech's standard working hours?",
-    "ground_truth": "Standard working hours are Monday through Friday, 9:00 AM to 5:30 PM local time, with a 60-minute lunch break.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q004",
-    "question": "What is the core collaboration window for remote employees?",
-    "ground_truth": "The core collaboration window is 10:00 AM to 3:00 PM.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q005",
-    "question": "How far in advance should one or two days of planned PTO normally be requested?",
-    "ground_truth": "One or two consecutive working days of planned PTO should normally be requested at least three business days in advance.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q006",
-    "question": "How far in advance should three or more consecutive working days of PTO normally be requested?",
-    "ground_truth": "Three or more consecutive working days of planned PTO should normally be requested at least ten business days in advance.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q007",
-    "question": "What is the maximum number of PTO days that can normally carry over to the next year?",
-    "ground_truth": "A maximum of five unused PTO days may normally carry over to the next calendar year.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q008",
-    "question": "Does sick leave reduce an employee's annual PTO balance?",
-    "ground_truth": "No. Sick leave does not reduce the employee's annual PTO balance.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q009",
-    "question": "When should an employee report a lost company device?",
-    "ground_truth": "A lost or stolen company device must be reported to the IT Service Desk immediately.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q010",
-    "question": "What authentication method must employees use when supported by company accounts?",
-    "ground_truth": "Employees must use multi-factor authentication (MFA) for company accounts that support MFA.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q011",
-    "question": "Where must business expenses be submitted?",
-    "ground_truth": "Business expenses must be submitted through ExpenseHub.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q012",
-    "question": "What is the deadline for submitting a business expense?",
-    "ground_truth": "Business expenses must be submitted within 30 calendar days of the transaction date.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q013",
-    "question": "At what expense amount are receipts required?",
-    "ground_truth": "Receipts are required for individual expenses of $25 or more.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q014",
-    "question": "Who approves all reimbursable expenses?",
-    "ground_truth": "The employee's manager must approve all reimbursable expenses.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q015",
-    "question": "What additional approval is required for expenses of $500 or more?",
-    "ground_truth": "Expenses of $500 or more also require Finance approval.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q016",
-    "question": "What is the annual learning budget for each full-time employee?",
-    "ground_truth": "Each full-time employee receives an annual learning budget of $800.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q017",
-    "question": "Does the annual learning budget carry over to the next year?",
-    "ground_truth": "No. Unused learning budget does not carry over to the next year.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q018",
-    "question": "How often are formal performance reviews normally conducted?",
-    "ground_truth": "Formal performance reviews are normally conducted twice per year, in June and December.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q019",
-    "question": "What is the default hotel reimbursement ceiling when a city is not listed?",
-    "ground_truth": "The default hotel ceiling is $200 per night before taxes.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q020",
-    "question": "Who handles reimbursement and travel-cost questions?",
-    "ground_truth": "Finance handles reimbursement and travel-cost questions.",
-    "difficulty": "easy"
-  },
-  {
-    "id": "Q021",
-    "question": "An employee joins the company 20 days ago. Can they work remotely without special approval?",
-    "ground_truth": "No. During the first 30 calendar days, a new employee may work remotely only with explicit approval from the department manager.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q022",
-    "question": "An employee wants to take four consecutive working days off. How early should they normally submit the PTO request?",
-    "ground_truth": "They should normally submit the request at least ten business days in advance.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q023",
-    "question": "An employee has 8 unused PTO days at year-end. How many can normally carry over?",
-    "ground_truth": "Five days can normally carry over; the balance above five days expires unless HR grants a documented exception.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q024",
-    "question": "An employee submits a $600 reimbursable expense with manager approval. Is manager approval alone sufficient?",
-    "ground_truth": "No. Expenses of $500 or more also require Finance approval.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q025",
-    "question": "A domestic flight is five hours long. What cabin should normally be booked?",
-    "ground_truth": "Economy class should normally be booked. Premium economy may be approved for flights longer than six hours.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q026",
-    "question": "A domestic flight is seven hours long. Can premium economy be approved?",
-    "ground_truth": "Yes. Premium economy may be approved for flights longer than six hours.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q027",
-    "question": "An employee accidentally sends Confidential information to the wrong external recipient. What should they do?",
-    "ground_truth": "They should report the suspected accidental disclosure to Security Operations immediately through the Security Incident form.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q028",
-    "question": "Can Confidential company data be stored in a personal Google Drive?",
-    "ground_truth": "No. Confidential or Restricted company data must not be stored in personal cloud drives.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q029",
-    "question": "An employee has been sick for four consecutive working days. Can HR request documentation?",
-    "ground_truth": "Yes. For sick leave lasting more than three consecutive working days, HR may request appropriate medical documentation.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q030",
-    "question": "Who should an employee contact first about a routine PTO approval question?",
-    "ground_truth": "The employee should first contact their direct manager.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q031",
-    "question": "Who should handle a question about parental leave eligibility?",
-    "ground_truth": "HR should handle questions about parental leave eligibility.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q032",
-    "question": "A business trip is expected to cost $2,300. Which approvals are required before booking?",
-    "ground_truth": "The manager must approve the business purpose, and Finance approval is also required because the estimated trip cost is $2,000 or more.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q033",
-    "question": "Can an employee choose a materially more expensive hotel solely to earn loyalty points?",
-    "ground_truth": "No. Employees must not select a materially more expensive option solely to earn loyalty points.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q034",
-    "question": "An employee needs to work remotely tomorrow. By when should the remote day normally be entered in WorkTrack?",
-    "ground_truth": "It should be entered in WorkTrack by 6:00 PM on the preceding business day.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q035",
-    "question": "What should an employee do if WorkTrack is unavailable when they begin work?",
-    "ground_truth": "They should notify their team lead through the approved company messaging channel and record the attendance once WorkTrack becomes available.",
-    "difficulty": "medium"
-  },
-  {
-    "id": "Q036",
-    "question": "What are the three main conditions a remote employee must maintain?",
-    "ground_truth": "A remote employee must maintain a reliable internet connection, a private workspace for confidential work, and availability during the 10:00 AM to 3:00 PM core collaboration window.",
-    "difficulty": "hard"
-  },
-  {
-    "id": "Q037",
-    "question": "What is the difference between the responsibilities of IT Service Desk and Security Operations for a lost device?",
-    "ground_truth": "The IT Service Desk must be notified immediately about the lost or stolen device. If the device contains Restricted information, Security Operations must also be notified immediately.",
-    "difficulty": "hard"
-  },
-  {
-    "id": "Q038",
-    "question": "What approvals are needed for a $550 business expense and a $1,900 business trip?",
-    "ground_truth": "The $550 expense requires manager approval and Finance approval. The $1,900 trip requires manager approval for the business purpose, while Finance approval is required only when the estimated trip cost is $2,000 or more.",
-    "difficulty": "hard"
-  },
-  {
-    "id": "Q039",
-    "question": "What are the rules for parental leave timing and how it can be divided?",
-    "ground_truth": "Eligible employees receive 12 weeks of parental leave. It may be taken continuously or, with manager and HR approval, split into no more than two blocks within the first 12 months after the qualifying event. When foreseeable, employees should notify HR at least 30 days before the expected start.",
-    "difficulty": "hard"
-  },
-  {
-    "id": "Q040",
-    "question": "Which company contact should an employee use for a phishing incident, a software installation issue, and a PTO policy question?",
-    "ground_truth": "A phishing incident should be reported to Security Operations; a software installation issue should go to the IT Service Desk; and a PTO policy question should first go to the direct manager.",
-    "difficulty": "hard"
-  }
-]
+  [
+    {
+      "id": "Q001",
+      "question": "How many PTO days does a full-time employee receive per calendar year?",
+      "ground_truth": "A full-time employee receives 20 PTO days per calendar year.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q002",
+      "question": "How many remote-work days are allowed per week?",
+      "ground_truth": "Employees may work remotely up to three days per week.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q003",
+      "question": "What are AcmeTech's standard working hours?",
+      "ground_truth": "Standard working hours are Monday through Friday, 9:00 AM to 5:30 PM local time, with a 60-minute lunch break.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q004",
+      "question": "What is the core collaboration window for remote employees?",
+      "ground_truth": "The core collaboration window is 10:00 AM to 3:00 PM.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q005",
+      "question": "How far in advance should one or two days of planned PTO normally be requested?",
+      "ground_truth": "One or two consecutive working days of planned PTO should normally be requested at least three business days in advance.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q006",
+      "question": "How far in advance should three or more consecutive working days of PTO normally be requested?",
+      "ground_truth": "Three or more consecutive working days of planned PTO should normally be requested at least ten business days in advance.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q007",
+      "question": "What is the maximum number of PTO days that can normally carry over to the next year?",
+      "ground_truth": "A maximum of five unused PTO days may normally carry over to the next calendar year.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q008",
+      "question": "Does sick leave reduce an employee's annual PTO balance?",
+      "ground_truth": "No. Sick leave does not reduce the employee's annual PTO balance.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q009",
+      "question": "When should an employee report a lost company device?",
+      "ground_truth": "A lost or stolen company device must be reported to the IT Service Desk immediately.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q010",
+      "question": "What authentication method must employees use when supported by company accounts?",
+      "ground_truth": "Employees must use multi-factor authentication (MFA) for company accounts that support MFA.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q011",
+      "question": "Where must business expenses be submitted?",
+      "ground_truth": "Business expenses must be submitted through ExpenseHub.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q012",
+      "question": "What is the deadline for submitting a business expense?",
+      "ground_truth": "Business expenses must be submitted within 30 calendar days of the transaction date.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q013",
+      "question": "At what expense amount are receipts required?",
+      "ground_truth": "Receipts are required for individual expenses of $25 or more.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q014",
+      "question": "Who approves all reimbursable expenses?",
+      "ground_truth": "The employee's manager must approve all reimbursable expenses.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q015",
+      "question": "What additional approval is required for expenses of $500 or more?",
+      "ground_truth": "Expenses of $500 or more also require Finance approval.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q016",
+      "question": "What is the annual learning budget for each full-time employee?",
+      "ground_truth": "Each full-time employee receives an annual learning budget of $800.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q017",
+      "question": "Does the annual learning budget carry over to the next year?",
+      "ground_truth": "No. Unused learning budget does not carry over to the next year.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q018",
+      "question": "How often are formal performance reviews normally conducted?",
+      "ground_truth": "Formal performance reviews are normally conducted twice per year, in June and December.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q019",
+      "question": "What is the default hotel reimbursement ceiling when a city is not listed?",
+      "ground_truth": "The default hotel ceiling is $200 per night before taxes.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q020",
+      "question": "Who handles reimbursement and travel-cost questions?",
+      "ground_truth": "Finance handles reimbursement and travel-cost questions.",
+      "difficulty": "easy"
+    },
+    {
+      "id": "Q021",
+      "question": "An employee joins the company 20 days ago. Can they work remotely without special approval?",
+      "ground_truth": "No. During the first 30 calendar days, a new employee may work remotely only with explicit approval from the department manager.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q022",
+      "question": "An employee wants to take four consecutive working days off. How early should they normally submit the PTO request?",
+      "ground_truth": "They should normally submit the request at least ten business days in advance.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q023",
+      "question": "An employee has 8 unused PTO days at year-end. How many can normally carry over?",
+      "ground_truth": "Five days can normally carry over; the balance above five days expires unless HR grants a documented exception.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q024",
+      "question": "An employee submits a $600 reimbursable expense with manager approval. Is manager approval alone sufficient?",
+      "ground_truth": "No. Expenses of $500 or more also require Finance approval.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q025",
+      "question": "A domestic flight is five hours long. What cabin should normally be booked?",
+      "ground_truth": "Economy class should normally be booked. Premium economy may be approved for flights longer than six hours.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q026",
+      "question": "A domestic flight is seven hours long. Can premium economy be approved?",
+      "ground_truth": "Yes. Premium economy may be approved for flights longer than six hours.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q027",
+      "question": "An employee accidentally sends Confidential information to the wrong external recipient. What should they do?",
+      "ground_truth": "They should report the suspected accidental disclosure to Security Operations immediately through the Security Incident form.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q028",
+      "question": "Can Confidential company data be stored in a personal Google Drive?",
+      "ground_truth": "No. Confidential or Restricted company data must not be stored in personal cloud drives.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q029",
+      "question": "An employee has been sick for four consecutive working days. Can HR request documentation?",
+      "ground_truth": "Yes. For sick leave lasting more than three consecutive working days, HR may request appropriate medical documentation.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q030",
+      "question": "Who should an employee contact first about a routine PTO approval question?",
+      "ground_truth": "The employee should first contact their direct manager.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q031",
+      "question": "Who should handle a question about parental leave eligibility?",
+      "ground_truth": "HR should handle questions about parental leave eligibility.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q032",
+      "question": "A business trip is expected to cost $2,300. Which approvals are required before booking?",
+      "ground_truth": "The manager must approve the business purpose, and Finance approval is also required because the estimated trip cost is $2,000 or more.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q033",
+      "question": "Can an employee choose a materially more expensive hotel solely to earn loyalty points?",
+      "ground_truth": "No. Employees must not select a materially more expensive option solely to earn loyalty points.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q034",
+      "question": "An employee needs to work remotely tomorrow. By when should the remote day normally be entered in WorkTrack?",
+      "ground_truth": "It should be entered in WorkTrack by 6:00 PM on the preceding business day.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q035",
+      "question": "What should an employee do if WorkTrack is unavailable when they begin work?",
+      "ground_truth": "They should notify their team lead through the approved company messaging channel and record the attendance once WorkTrack becomes available.",
+      "difficulty": "medium"
+    },
+    {
+      "id": "Q036",
+      "question": "What are the three main conditions a remote employee must maintain?",
+      "ground_truth": "A remote employee must maintain a reliable internet connection, a private workspace for confidential work, and availability during the 10:00 AM to 3:00 PM core collaboration window.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "Q037",
+      "question": "What is the difference between the responsibilities of IT Service Desk and Security Operations for a lost device?",
+      "ground_truth": "The IT Service Desk must be notified immediately about the lost or stolen device. If the device contains Restricted information, Security Operations must also be notified immediately.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "Q038",
+      "question": "What approvals are needed for a $550 business expense and a $1,900 business trip?",
+      "ground_truth": "The $550 expense requires manager approval and Finance approval. The $1,900 trip requires manager approval for the business purpose, while Finance approval is required only when the estimated trip cost is $2,000 or more.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "Q039",
+      "question": "What are the rules for parental leave timing and how it can be divided?",
+      "ground_truth": "Eligible employees receive 12 weeks of parental leave. It may be taken continuously or, with manager and HR approval, split into no more than two blocks within the first 12 months after the qualifying event. When foreseeable, employees should notify HR at least 30 days before the expected start.",
+      "difficulty": "hard"
+    },
+    {
+      "id": "Q040",
+      "question": "Which company contact should an employee use for a phishing incident, a software installation issue, and a PTO policy question?",
+      "ground_truth": "A phishing incident should be reported to Security Operations; a software installation issue should go to the IT Service Desk; and a PTO policy question should first go to the direct manager.",
+      "difficulty": "hard"
+    }
+  ]
