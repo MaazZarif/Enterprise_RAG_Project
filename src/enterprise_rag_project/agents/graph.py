@@ -88,9 +88,13 @@ graph_builder.add_conditional_edges(
 )
 graph_builder.add_edge("missing_document", "save_answer")
 
-graph_builder.add_edge(
+graph_builder.add_conditional_edges(
     "human_document_review",
-    "filter_selected_document"
+    route_document_selection,
+    {
+        "proceed": "filter_selected_document",
+        "missing_document": "missing_document",
+    },
 )
 
 graph_builder.add_edge(

@@ -5,6 +5,7 @@ from langchain_core.prompts import ChatPromptTemplate
 
 from enterprise_rag_project.agents.state import RAGState
 from enterprise_rag_project.services.llm import get_llm
+from enterprise_rag_project.services.document_context import get_active_documents
 
 
 class ContextCheck(BaseModel):
@@ -18,18 +19,13 @@ class ContextCheck(BaseModel):
 
 def context_check(state: RAGState):
 
-    if state.get("selected_document_id") is not None:
-        documents = state.get("selected_documents", [])
-    else:
-        documents = (
-            state.get("selected_documents")
-            if state.get("selected_documents") is not None
-            else state.get("reranked_documents", [])
-        )
+ 
+
+    documents = get_active_documents(state)
 
     if not documents:
         return {
-            "context_status": "insufficient"
+            "context_status": "insufficient",
         }
 
     query = (

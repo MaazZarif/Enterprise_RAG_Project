@@ -2,17 +2,16 @@ from langchain_core.prompts import ChatPromptTemplate
 
 from enterprise_rag_project.agents.state import RAGState
 from enterprise_rag_project.services.llm import get_llm
+from enterprise_rag_project.services.document_context import get_active_documents
 
 def answer_generator(state: RAGState):
 
     llm = get_llm()
 
-    # Prefer document-resolved chunks.
-    documents = (
-    state.get("selected_documents")
-    or state.get("reranked_documents")
-    or state.get("documents", [])
-)
+    documents = get_active_documents(state)
+  
+    if not documents:
+      raise ValueError("No selected documents available for answer generation")
 
     if not documents:
         return {

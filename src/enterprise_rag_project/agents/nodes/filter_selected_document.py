@@ -1,18 +1,18 @@
 from enterprise_rag_project.agents.state import RAGState
 
 def filter_selected_document(state: RAGState):
+    selected_id = state.get("selected_document_id")
 
-    selected_document_id = state.get("selected_document_id")
-    documents = state.get("reranked_documents", [])
-
-    if selected_document_id is None:
+    if selected_id is None:
         return {
-            "selected_documents": documents,
+            "selected_documents": [],
         }
+
+    documents = state.get("reranked_documents", [])
 
     selected_documents = [
         doc for doc in documents
-        if doc.metadata.get("document_id") == selected_document_id
+        if doc.metadata.get("document_id") == selected_id
     ]
 
     return {

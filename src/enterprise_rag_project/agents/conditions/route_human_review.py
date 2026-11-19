@@ -1,9 +1,10 @@
+def route_human_review(state):
+    decision = state.get("human_decision")
 
-from enterprise_rag_project.agents.state import RAGState
-
-def route_human_review(state:RAGState):
-
-    if state["human_decision"]:
+    if decision is True:
         return "proceed"
 
-    return "reject"
+    if decision is False:
+        return "reject"
+
+    raise ValueError("Human decision is missing")

@@ -1,16 +1,13 @@
+def missing_document(state):
+    question = state.get("clarification_question")
 
-from enterprise_rag_project.agents.state import RAGState
-
-
-def missing_document(state: RAGState):
-    message = (
-        "I couldn't find the document you're referring to "
-        "in this conversation. Please upload that document "
-        "so I can answer your question."
-    )
+    if not question:
+        question = "Please upload the document you want me to analyze."
 
     return {
-        "answer": message,
-        "clarification_question": message,
+        "answer": question,
+        "clarification_question": question,
+        "selected_document_id": None,
+        "selected_documents": [],
         "citations": [],
     }

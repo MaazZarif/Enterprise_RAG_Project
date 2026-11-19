@@ -94,7 +94,16 @@ def chat(
         "generation_attempts": 0,
 
         "citations": [],
-        "human_decision":None
+        "human_decision":None,
+        "selected_document_id": None,
+        "selected_documents": [],
+        "available_documents": [],
+        "document_status": "not_required",
+        "clarification_question": None,
+        "requested_document": None,
+        "document_clarification": None,
+        "document_selection_response": None,
+        "unsupported_claims": [],
     }
 
     config = {
