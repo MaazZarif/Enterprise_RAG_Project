@@ -22,13 +22,16 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     status: str
     answer: str | None = None
-    citations: List[dict] = []
+    citations: List[dict] = Field(default_factory=list)
     thread_id: str
     message: str | None = None
+    question: str | None = None
+    documents: List[dict] = Field(default_factory=list)
 
 class HumanReviewRequest(BaseModel):
     thread_id: str
-    decision: bool
+    decision: bool | None = None
+    selected_document_id: int | None = None
 
 
 @router.post("/chat",response_model=ChatResponse)
@@ -124,6 +127,21 @@ def chat(
         "message": "Human review is required before continuing.",
     }
 
+    if result.get("document_status") == "missing":
+        question = result.get("clarification_question")
+
+        return {
+            "status": "document_upload_required",
+            "answer": None,
+            "citations": [],
+            "thread_id": request_data.thread_id,
+            "message": question,
+            "question": question,
+            "documents": [],
+        }
+
+
+
     assistant_message = Message(
         conversation_id = conversation.id,
         role = "assistant",
@@ -182,8 +200,20 @@ def chat_resume(request_data:HumanReviewRequest ,
         ]
     }
 
+    if request_data.selected_document_id is not None:
+        resume_value = {
+            "selected_document_id": request_data.selected_document_id
+        }
+    elif request_data.decision is not None:
+        resume_value = request_data.decision
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail="Provide a decision or selected_document_id."
+        )
+
     result = graph.invoke(
-        Command(resume=request_data.decision),
+        Command(resume=resume_value),
         config=config
     )
 
@@ -195,6 +225,19 @@ def chat_resume(request_data:HumanReviewRequest ,
             "thread_id": request_data.thread_id,
             "message": "Human review is still required.",
         }
+
+    if result.get("document_status") == "missing":
+        question = result.get("clarification_question")
+
+        return {
+        "status": "document_upload_required",
+        "answer": None,
+        "citations": [],
+        "thread_id": request_data.thread_id,
+        "message": question,
+        "question": question,
+        "documents": [],
+    }
 
     answer = result.get("answer")
 

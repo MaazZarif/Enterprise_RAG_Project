@@ -1,59 +1,80 @@
+
 from enterprise_rag_project.agents.state import RAGState
+
 
 def check_document_selection(state: RAGState):
     available_documents = state.get("available_documents", [])
     retrieved_documents = state.get("reranked_documents", [])
 
-    # No documents are uploaded in this conversation.
+    # No documents uploaded in this conversation.
     if not available_documents:
         return {
             "document_status": "missing",
             "selected_document_id": None,
             "selected_documents": [],
+            "clarification_question": (
+                "I couldn't find any uploaded documents in this conversation. "
+                "Please upload the document you want me to use."
+            ),
         }
 
-    query = state.get("contextualized_query") or state.get("query", "")
-    query_lower = query.lower()
+    query = (
+        state.get("contextualized_query")
+        or state.get("query", "")
+    ).lower()
 
-    # First, check whether the user explicitly mentioned a filename.
+    # Check whether the user explicitly mentioned a filename.
     matched_documents = [
         doc for doc in available_documents
-        if doc["filename"].lower() in query_lower
+        if doc["filename"].lower() in query
     ]
 
     if len(matched_documents) == 1:
-        return {
-            "document_status": "found",
-            "selected_document_id": matched_documents[0]["document_id"],
-        }
+        selected_id = matched_documents[0]["document_id"]
 
-    if len(matched_documents) > 1:
+    elif len(matched_documents) > 1:
         return {
             "document_status": "ambiguous",
             "selected_document_id": None,
+            "selected_documents": [],
         }
 
-    # Otherwise, identify the documents represented in retrieved chunks.
-    retrieved_ids = {
-        doc.metadata.get("document_id")
-        for doc in retrieved_documents
-        if doc.metadata.get("document_id") is not None
-    }
-
-    if len(retrieved_ids) == 1:
-        return {
-            "document_status": "found",
-            "selected_document_id": retrieved_ids.pop(),
+    else:
+        # Identify documents represented in retrieval results.
+        retrieved_ids = {
+            doc.metadata.get("document_id")
+            for doc in retrieved_documents
+            if doc.metadata.get("document_id") is not None
         }
 
-    if len(retrieved_ids) > 1:
-        return {
-            "document_status": "ambiguous",
-            "selected_document_id": None,
-        }
+        if len(retrieved_ids) == 0:
+            return {
+                "document_status": "missing",
+                "selected_document_id": None,
+                "selected_documents": [],
+                "clarification_question": (
+                    "I couldn't find relevant information in your uploaded "
+                    "documents. Please upload the document you want me to use."
+                ),
+            }
 
-    # No clear document match. Let the context checker handle this.
+        elif len(retrieved_ids) == 1:
+            selected_id = next(iter(retrieved_ids))
+
+        else:
+            return {
+                "document_status": "ambiguous",
+                "selected_document_id": None,
+                "selected_documents": [],
+            }
+
+    selected_documents = [
+        doc for doc in retrieved_documents
+        if doc.metadata.get("document_id") == selected_id
+    ]
+
     return {
-        "document_status": "not_required",
-        "selected_document_id": None,
+        "document_status": "found",
+        "selected_document_id": selected_id,
+        "selected_documents": selected_documents,
     }

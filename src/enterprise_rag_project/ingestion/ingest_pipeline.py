@@ -1,21 +1,23 @@
-from enterprise_rag_project.ingestion.embeddings import get_embeddings
-from enterprise_rag_project.ingestion.vectore_store import get_vector_store, initialize_collection
-from enterprise_rag_project.ingestion.loader import load_document
-from enterprise_rag_project.ingestion.chunker import chunk_documents
+
 from pathlib import Path
 
+from enterprise_rag_project.ingestion.embeddings import get_embeddings
+from enterprise_rag_project.ingestion.vectore_store import (
+    get_vector_store,
+    initialize_collection,
+)
+from enterprise_rag_project.ingestion.loader import load_document
+from enterprise_rag_project.ingestion.chunker import chunk_documents
 
-
-def ingest_pipeline(file_path, document_id, user_id):
-
+def ingest_pipeline(file_path, document_id, user_id, thread_id):
     documents = load_document(file_path)
-
     chunks = chunk_documents(documents)
 
-    for index,chunk in enumerate(chunks):
+    for index, chunk in enumerate(chunks):
         chunk.metadata["document_id"] = document_id
         chunk.metadata["user_id"] = user_id
-        chunk.metadata["chunk_index"] = index  
+        chunk.metadata["thread_id"] = thread_id
+        chunk.metadata["chunk_index"] = index
         chunk.metadata["filename"] = Path(file_path).name
 
     vector_store = get_vector_store()

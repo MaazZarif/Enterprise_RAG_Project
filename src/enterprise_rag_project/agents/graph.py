@@ -29,6 +29,7 @@ from enterprise_rag_project.agents.nodes.human_document_review import (
 from enterprise_rag_project.agents.nodes.filter_selected_document import (
     filter_selected_document,
 )
+from enterprise_rag_project.agents.nodes.missing_document import missing_document
 from enterprise_rag_project.agents.nodes.document_resolver import document_resolver
 from enterprise_rag_project.db.checkpointer import get_checkpointer
 from langchain_core.messages import HumanMessage
@@ -55,44 +56,47 @@ graph_builder.add_node("check_document_selection",check_document_selection)
 graph_builder.add_node("human_document_review",human_document_review)
 graph_builder.add_node("filter_selected_document",filter_selected_document)
 graph_builder.add_node("document_resolver",document_resolver)
+graph_builder.add_node("missing_document", missing_document)
 
 
 
 graph_builder.add_edge(START, "query_analyzer")
+
 graph_builder.add_conditional_edges(
     "query_analyzer",
     route_query,
     {
-        "rag": "document_resolver",
-        "direct": "direct_answer"
+        "rag": "contextualize_query",
+        "direct": "direct_answer",
     }
 )
+graph_builder.add_edge("direct_answer", "save_answer")
 
-graph_builder.add_edge(
-    "document_resolver",
-    "contextualize_query"
-)
-
-graph_builder.add_edge(
-    "contextualize_query",
-    "retrieval_node"
-)
+graph_builder.add_edge("contextualize_query", "retrieval_node")
 graph_builder.add_edge("retrieval_node", "reranker")
+graph_builder.add_edge("reranker", "document_resolver")
+graph_builder.add_edge("document_resolver", "check_document_selection")
 
-graph_builder.add_edge("reranker", "check_document_selection")
 graph_builder.add_conditional_edges(
     "check_document_selection",
     route_document_selection,
     {
         "proceed": "context_check",
-        "human_document_review": "human_document_review"
+        "human_document_review": "human_document_review",
+        "missing_document": "missing_document",
     }
 )
+graph_builder.add_edge("missing_document", "save_answer")
 
-graph_builder.add_edge("human_document_review", "filter_selected_document")
+graph_builder.add_edge(
+    "human_document_review",
+    "filter_selected_document"
+)
 
-graph_builder.add_edge("filter_selected_document", "context_check")
-
+graph_builder.add_edge(
+    "filter_selected_document",
+    "context_check"
+)
 graph_builder.add_conditional_edges(
     "context_check",
     route_context,
@@ -146,6 +150,7 @@ if __name__ ==  "__main__":
     initial_state = {
     "query": "explain the company prohibited activities ?",
     "user_id": 1,
+    "thread_id": "test-thread-1",
 
     "messages": [
         HumanMessage(

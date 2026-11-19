@@ -62,3 +62,4 @@ class RAGState(TypedDict, total=False):
     # Retry and citations
     retry_count: int
     citations: List[dict]
+    document_selection_response: dict | int | None
