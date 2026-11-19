@@ -7,35 +7,36 @@ from langchain_core.prompts import ChatPromptTemplate
 
 class QueryRoute(BaseModel):
     route: Literal["rag", "direct"] = Field(
-        description="Route the query to RAG or direct answering"
+        description="Whether the query requires company or document knowledge"
     )
 
 
 def query_analyzer(state: RAGState):
     llm = get_llm()
-
     structured_llm = llm.with_structured_output(QueryRoute)
 
     history = "\n".join(
         f"{message.type}: {message.content}"
-        for message in state["messages"][-6:]
+        for message in state.get("messages", [])[-6:]
     )
 
     prompt = ChatPromptTemplate.from_messages([
         (
             "system",
             """
-            Analyze the user's latest query.
+            Analyze the user's latest query using the conversation history.
 
-            Use the conversation history to understand references
-            such as "it", "that", "those days", "this policy", etc.
+            Choose "rag" when the query:
+            - Requires company-specific knowledge.
+            - Asks about policies, procedures, manuals, or internal information.
+            - Refers to information from a previously discussed or uploaded document.
+            - Is a follow-up to a document-related question.
 
-            Choose "rag" if the query requires company-specific
-            documents, policies, procedures, manuals, internal
-            knowledge, or uploaded files.
+            Choose "direct" when the query is general knowledge
+            and does not require company-specific or document information.
 
-            Choose "direct" if it is a general knowledge question
-            that does not require company-specific information.
+            If the query is ambiguous but appears to refer to a document
+            or company information, choose "rag".
             """
         ),
         (
@@ -57,6 +58,4 @@ def query_analyzer(state: RAGState):
         "query": state["query"],
     })
 
-    return {
-        "route": result.route
-    }
+    return {"route": result.route}

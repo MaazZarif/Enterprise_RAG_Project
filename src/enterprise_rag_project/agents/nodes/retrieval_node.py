@@ -1,7 +1,8 @@
 from enterprise_rag_project.agents.state import RAGState
-from enterprise_rag_project.ingestion.retriever import get_retriever    
+from enterprise_rag_project.ingestion.retriever import get_retriever
 
 import time
+
 
 def retrieval_node(state: RAGState):
 
@@ -14,6 +15,7 @@ def retrieval_node(state: RAGState):
 
     retriever = get_retriever(
         user_id=state["user_id"],
+        thread_id=state["thread_id"],
         k=10,
     )
 

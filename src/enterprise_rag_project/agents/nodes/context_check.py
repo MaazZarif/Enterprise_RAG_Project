@@ -18,58 +18,61 @@ class ContextCheck(BaseModel):
 
 def context_check(state: RAGState):
 
-    documents = state["documents"]
+    documents = (
+        state.get("reranked_documents")
+        or state.get("documents", [])
+    )
 
-    # No retrieved documents = automatically insufficient
     if not documents:
         return {
             "context_status": "insufficient"
         }
 
     query = (
-        # state.get("rewritten_query")
         state.get("contextualized_query")
         or state["query"]
     )
 
-    
-
     context = "\n\n".join(
-        doc.page_content
+        f"""
+Filename: {doc.metadata.get("filename", "Unknown")}
+Content:
+{doc.page_content}
+"""
         for doc in documents
     )
 
     llm = get_llm()
 
-    structured_llm = llm.with_structured_output(
-        ContextCheck
-    )
+    structured_llm = llm.with_structured_output(ContextCheck)
 
     prompt = ChatPromptTemplate.from_messages([
         (
             "system",
             """
-You are checking whether retrieved document context is sufficient
-to answer the user's query.
+            You are evaluating retrieved document context.
 
-Return "sufficient" if the context contains enough relevant
-information to answer the query reliably.
+            Return "sufficient" only when the provided context contains
+            enough relevant and reliable information to answer the query.
 
-Return "insufficient" if the context is missing important
-information, is unrelated, or cannot support a reliable answer.
+            Return "insufficient" when:
+            - The context is unrelated.
+            - Important information is missing.
+            - The context does not support a reliable answer.
 
-Do not answer the user's question.
-"""
+            Do not use outside knowledge.
+            Do not answer the user's question.
+            """
         ),
         (
             "human",
             """
-Query:
-{query}
+            Query:
+            {query}
 
-Retrieved context:
-{context}
-"""
+            Retrieved context:
+            {context}
+            """
         )
     ])
 

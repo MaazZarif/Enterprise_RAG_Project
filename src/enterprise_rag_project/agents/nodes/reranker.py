@@ -1,13 +1,3 @@
-
-from enterprise_rag_project.agents.state import RAGState
-from enterprise_rag_project.services.llm import get_llm
-from pydantic import BaseModel,Field
-from langchain_core.prompts import ChatPromptTemplate
-from typing import List
-
-
-
-
 from typing import List
 
 from pydantic import BaseModel, Field
@@ -25,30 +15,24 @@ class RankedDocuments(BaseModel):
 
 def rerank_documents(state: RAGState):
 
+    documents = state.get("documents", [])
+
+    if not documents:
+        return {"reranked_documents": []}
+
     llm = get_llm()
+    structured_llm = llm.with_structured_output(RankedDocuments)
 
-    structured_llm = llm.with_structured_output(
-        RankedDocuments
-    )
-
-    # Use the query that produced the current retrieval results
     query = (
-        # state.get("rewritten_query")
         state.get("contextualized_query")
         or state["query"]
     )
 
-    documents = state["documents"]
-
-    # Safety check
-    if not documents:
-        return {
-            "reranked_documents": []
-        }
-
     formatted_documents = "\n\n".join(
         f"""
-Document {i}:
+Document index: {i}
+Filename: {doc.metadata.get("filename", "Unknown")}
+Content:
 {doc.page_content}
 """
         for i, doc in enumerate(documents)
@@ -58,26 +42,30 @@ Document {i}:
         (
             "system",
             """
-You are a document reranker.
+            You are a document relevance reranker.
 
-Given a user search query and retrieved documents,
-rank the documents from most relevant to least relevant.
+            Rank the retrieved document chunks according to their
+            relevance to the user's query.
 
-Return the document indices in ranked order.
+            Consider:
+            - How directly the content answers the query.
+            - Whether the content contains the required information.
+            - Whether it is relevant to the user's actual intent.
 
-Do not answer the user's question.
-Do not invent document indices.
-"""
+            Return valid document indices only.
+            Do not answer the query.
+            Do not invent information or indices.
+            """
         ),
         (
             "human",
             """
-Query:
-{query}
+            Query:
+            {query}
 
-Documents:
-{documents}
-"""
+            Retrieved documents:
+            {documents}
+            """
         )
     ])
 
@@ -88,10 +76,24 @@ Documents:
         "documents": formatted_documents,
     })
 
+    # Keep only valid, unique indices.
+    valid_indices = []
+    for index in result.ranked_indices:
+        if (
+            isinstance(index, int)
+            and 0 <= index < len(documents)
+            and index not in valid_indices
+        ):
+            valid_indices.append(index)
+
+    # Preserve any documents the LLM omitted.
+    valid_indices.extend(
+        i for i in range(len(documents))
+        if i not in valid_indices
+    )
+
     reranked_documents = [
-        documents[i]
-        for i in result.ranked_indices
-        if 0 <= i < len(documents)
+        documents[i] for i in valid_indices
     ]
 
     return {

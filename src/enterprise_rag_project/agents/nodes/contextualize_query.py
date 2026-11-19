@@ -1,4 +1,3 @@
-
 from langchain_core.prompts import ChatPromptTemplate
 
 from enterprise_rag_project.agents.state import RAGState
@@ -10,7 +9,7 @@ def contextualize_query(state: RAGState):
 
     history = "\n".join(
         f"{message.type}: {message.content}"
-        for message in state["messages"][-6:]
+        for message in state.get("messages", [])[-6:]
     )
 
     prompt = ChatPromptTemplate.from_messages([
@@ -19,12 +18,16 @@ def contextualize_query(state: RAGState):
             """
             Rewrite the latest user query into a clear standalone query.
 
-            Use the conversation history only to resolve references
-            such as "it", "that", "those days", "this policy", etc.
-
-            Do not answer the question.
-
-            Preserve the user's original intent.
+            Instructions:
+            - Use conversation history to resolve references such as
+              "it", "that document", "this policy", and "those rules".
+            - Preserve the user's original intent.
+            - Do not answer the question.
+            - Do not invent information.
+            - Do not assume which document the user means if multiple
+              documents could match.
+            - If the document identity is unclear, preserve that ambiguity
+              rather than guessing.
             """
         ),
         (
@@ -47,5 +50,5 @@ def contextualize_query(state: RAGState):
     })
 
     return {
-        "contextualized_query": response.content
+        "contextualized_query": response.content.strip()
     }

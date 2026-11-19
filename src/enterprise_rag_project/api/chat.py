@@ -71,6 +71,7 @@ def chat(
     initial_state = {
         "query": request_data.query,
         "user_id": current_user.id,
+        "thread_id": request_data.thread_id,
 
         "messages": [
             HumanMessage(content=request_data.query)
