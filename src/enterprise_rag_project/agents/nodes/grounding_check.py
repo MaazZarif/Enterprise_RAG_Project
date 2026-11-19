@@ -28,7 +28,6 @@ def grounding_check(state: RAGState):
     if not documents:
         return {
             "grounding_status": "not_grounded",
-            "unsupported_claims": ["No selected document context available"],
         }
 
     context = "\n\n".join(

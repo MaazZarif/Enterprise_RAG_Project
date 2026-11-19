@@ -17,6 +17,7 @@ from enterprise_rag_project.agents.nodes.contextualize_query import contextualiz
 from enterprise_rag_project.agents.nodes.save_answer import save_answer
 from enterprise_rag_project.agents.nodes.human_review import human_review
 from enterprise_rag_project.agents.conditions.route_human_review import route_human_review
+from enterprise_rag_project.agents.conditions.route_human_document_review import route_human_document_review
 from enterprise_rag_project.agents.nodes.check_document_selection import (
     check_document_selection
 )
@@ -90,12 +91,13 @@ graph_builder.add_edge("missing_document", "save_answer")
 
 graph_builder.add_conditional_edges(
     "human_document_review",
-    route_document_selection,
+    route_human_document_review,
     {
         "proceed": "filter_selected_document",
         "missing_document": "missing_document",
     },
 )
+
 
 graph_builder.add_edge(
     "filter_selected_document",

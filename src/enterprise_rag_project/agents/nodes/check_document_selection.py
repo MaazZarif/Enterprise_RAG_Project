@@ -1,6 +1,6 @@
 
 from enterprise_rag_project.agents.state import RAGState
-
+from pathlib import Path
 
 def check_document_selection(state: RAGState):
     available_documents = state.get("available_documents", [])
@@ -25,9 +25,9 @@ def check_document_selection(state: RAGState):
 
     # Check whether the user explicitly mentioned a filename.
     matched_documents = [
-        doc for doc in available_documents
-        if doc["filename"].lower() in query
-    ]
+    doc for doc in available_documents
+    if Path(doc["filename"]).stem.lower() in query
+]
 
     if len(matched_documents) == 1:
         selected_id = matched_documents[0]["document_id"]

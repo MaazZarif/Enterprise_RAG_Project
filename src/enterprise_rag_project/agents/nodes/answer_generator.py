@@ -10,8 +10,7 @@ def answer_generator(state: RAGState):
 
     documents = get_active_documents(state)
   
-    if not documents:
-      raise ValueError("No selected documents available for answer generation")
+
 
     if not documents:
         return {
