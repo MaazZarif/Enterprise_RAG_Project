@@ -1,12 +1,12 @@
 from enterprise_rag_project.agents.state import RAGState
 
 
-def route_grounding(state:RAGState):
+def route_grounding(state: RAGState):
 
-    if state["grounding_status"] == "grounded":
+    if state.get("grounding_status") == "grounded":
         return "grounded"
 
-    if state.get("generation_attempts",0) >= 3:
-        return "fallback"
+    if state.get("generation_attempts", 0) < 2:
+        return "regenerate"
 
-    return "regenerate"
+    return "fallback"

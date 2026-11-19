@@ -47,5 +47,4 @@ def direct_answer(state: RAGState):
 
     return {
         "answer": response.content,
-        "messages": [response],
     }

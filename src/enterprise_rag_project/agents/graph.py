@@ -126,63 +126,54 @@ graph_builder.add_conditional_edges(
         "regenerate": "answer_generator"
     }
 )
+graph_builder.add_edge("fallback_answer","save_answer")
+
 
 graph_builder.add_edge(
     "save_answer",
     "citation_builder"
 )
 graph_builder.add_edge("citation_builder",END)
-graph_builder.add_edge("fallback_answer",END)
 
 
 def build_graph(checkpointer):
     graph = graph_builder.compile(checkpointer=checkpointer)
     return graph
 
-if __name__ ==  "__main__":
+if __name__ == "__main__":
 
     with get_checkpointer() as checkpointer:
 
-        graph = graph_builder.compile(
-            checkpointer=checkpointer
-        )
+        checkpointer.setup()
 
-    initial_state = {
-    "query": "explain the company prohibited activities ?",
-    "user_id": 1,
-    "thread_id": "test-thread-1",
+        graph = build_graph(checkpointer)
 
-    "messages": [
-        HumanMessage(
-            content="explain the company prohibited activities ?"
-        )
-    ],
+        initial_state = {
+            "query": "Explain the company prohibited activities?",
+            "user_id": 1,
+            "thread_id": "test-thread-1",
+            "messages": [
+                HumanMessage(
+                    content="Explain the company prohibited activities?"
+                )
+            ],
+            "documents": [],
+            "reranked_documents": [],
+            "selected_documents": [],
+            "retry_count": 0,
+            "generation_attempts": 0,
+            "citations": [],
+        }
 
-    "documents": [],
-    "reranked_documents": [],
+        config = {
+            "configurable": {
+                "thread_id": "test-thread-1"
+            }
+        }
 
-    "retry_count": 0,
-    "generation_attempts": 0,
-    "citations": [],
-}
-
-    config = {
-    "configurable": {
-        "thread_id": "test-thread-1"
-    }
-}
-
-    for event in graph.stream(
-        initial_state,
-        config=config
-    ):
-        print(event)
-        print("-" * 50)
-
-
-
-
-
-
-
-
+        for event in graph.stream(
+            initial_state,
+            config=config
+        ):
+            print(event)
+            print("-" * 50)

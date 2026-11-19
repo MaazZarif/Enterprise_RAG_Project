@@ -1,6 +1,5 @@
 
-from typing import TypedDict, Annotated, Literal, List
-
+from typing import TypedDict, Annotated, Literal
 from langchain_core.documents import Document
 from langchain_core.messages import BaseMessage
 from langgraph.graph.message import add_messages
@@ -28,7 +27,6 @@ class RAGState(TypedDict, total=False):
     # Document resolution
     available_documents: list[dict]
     selected_document_id: int | None
-
     document_status: Literal[
         "found",
         "missing",
@@ -39,6 +37,7 @@ class RAGState(TypedDict, total=False):
     clarification_question: str | None
     requested_document: str | None
     document_clarification: str | None
+    document_selection_response: dict | int | None
 
     # Context evaluation
     context_status: Literal[
@@ -55,11 +54,11 @@ class RAGState(TypedDict, total=False):
         "grounded",
         "not_grounded",
     ]
+    unsupported_claims: list[str]
 
     # Human review
     human_decision: bool | None
 
     # Retry and citations
     retry_count: int
-    citations: List[dict]
-    document_selection_response: dict | int | None
+    citations: list[dict]

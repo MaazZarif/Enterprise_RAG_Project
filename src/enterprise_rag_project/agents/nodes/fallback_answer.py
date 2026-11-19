@@ -8,5 +8,6 @@ def fallback_answer(state: RAGState):
             "I couldn't generate an answer that is reliably supported "
             "by the available documents."
         ),
-        "citations": []
+        "citations": [],
+        "selected_documents": [],
     }

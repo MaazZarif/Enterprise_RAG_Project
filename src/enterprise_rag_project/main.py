@@ -26,6 +26,8 @@ async def lifespan(app: FastAPI):
     initialize_collection()
     with get_checkpointer() as checkpointer:
 
+        checkpointer.setup()
+
         app.state.graph = build_graph(
             checkpointer
         )

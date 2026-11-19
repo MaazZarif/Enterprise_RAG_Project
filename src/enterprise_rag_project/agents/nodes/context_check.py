@@ -18,10 +18,14 @@ class ContextCheck(BaseModel):
 
 def context_check(state: RAGState):
 
-    documents = (
-        state.get("reranked_documents")
-        or state.get("documents", [])
-    )
+    if state.get("selected_document_id") is not None:
+        documents = state.get("selected_documents", [])
+    else:
+        documents = (
+            state.get("selected_documents")
+            if state.get("selected_documents") is not None
+            else state.get("reranked_documents", [])
+        )
 
     if not documents:
         return {

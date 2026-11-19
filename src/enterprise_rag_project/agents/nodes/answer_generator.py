@@ -10,7 +10,8 @@ def answer_generator(state: RAGState):
     # Prefer document-resolved chunks.
     documents = (
     state.get("selected_documents")
-    or state.get("reranked_documents", [])
+    or state.get("reranked_documents")
+    or state.get("documents", [])
 )
 
     if not documents:
